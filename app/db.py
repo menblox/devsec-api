@@ -9,12 +9,12 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     pass
 
+
 class User(UserBase):
     id: int
 
     class Config:
         from_attributes = True
-    
 
 
 class PostBase(BaseModel):
@@ -25,7 +25,8 @@ class PostBase(BaseModel):
 
 class PostCreate(PostBase):
     pass
-    
+
+
 class PostResponse(PostBase):
     id: int
     author: User
