@@ -10,3 +10,5 @@ ignore = ["B008"]
 
 [tool.mypy]
 strict = true
+python_version = "3.12"
+plugins = "sqlalchemy.ext.mypy.plugin"

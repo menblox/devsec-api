@@ -1,22 +1,22 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, Mapped
 from database import Base
 
 
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    age = Column(Integer)
+    id: Mapped[int] = Column(Integer, primary_key=True, index=True)
+    name: Mapped[str] = Column(String, index=True)
+    age: Mapped[int] = Column(Integer)
 
 
 class Post(Base):
     __tablename__ = "posts"
 
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    body = Column(String)
-    author_id = Column(Integer, ForeignKey("users.id"))
+    id: Mapped[int] = Column(Integer, primary_key=True, index=True)
+    title: Mapped[str] = Column(String, index=True)
+    body: Mapped[str] = Column(String)
+    author_id: Mapped[int] = Column(Integer, ForeignKey("users.id"))
 
-    author = relationship("User")
+    author: Mapped["User"] = relationship("User")
