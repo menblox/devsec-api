@@ -24,8 +24,11 @@ jobs:
             run: ruff check .
 
           - name: run black
-            run: black .
+            run: black --check .
 
           - name: run mypy
             run: mypy .
+          
 
+          - name: run tests
+            run: pytest

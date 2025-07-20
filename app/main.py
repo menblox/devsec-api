@@ -2,9 +2,9 @@ from fastapi import FastAPI, HTTPException, Depends
 from typing import List, Iterator
 from sqlalchemy.orm import Session
 
-from models import User, Post
-from database import engine, session_local, Base
-from db import UserCreate, User as DbUser, PostCreate, PostResponse
+from app.models import User, Post
+from app.database import engine, session_local, Base
+from app.db import UserCreate, User as DbUser, PostCreate, PostResponse
 
 app = FastAPI()
 

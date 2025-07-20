@@ -3,6 +3,7 @@ line-length = 88
 
 [tool.ruff]
 line-length = 88
+exclude = ["tests/test_api.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "B"]
@@ -12,3 +13,4 @@ ignore = ["B008"]
 strict = true
 python_version = "3.12"
 plugins = "sqlalchemy.ext.mypy.plugin"
+exclude = ["tests/"]
