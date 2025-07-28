@@ -7,7 +7,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    pass
+    password: str
 
 
 class User(UserBase):
@@ -30,6 +30,23 @@ class PostCreate(PostBase):
 class PostResponse(PostBase):
     id: int
     author: User
+
+    class Config:
+        from_attributes = True
+
+
+class User_log_in(BaseModel):
+    name: str
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class Name_JWT(BaseModel):
+    name: str
 
     class Config:
         from_attributes = True

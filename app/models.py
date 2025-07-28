@@ -9,6 +9,7 @@ class User(Base):
     id: Mapped[int] = Column(Integer, primary_key=True, index=True)
     name: Mapped[str] = Column(String, index=True)
     age: Mapped[int] = Column(Integer)
+    hash_password: Mapped[str] = Column(String)
 
 
 class Post(Base):
