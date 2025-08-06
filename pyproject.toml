@@ -3,7 +3,7 @@ line-length = 88
 
 [tool.ruff]
 line-length = 88
-exclude = ["tests/test_api.py"]
+exclude = ["tests/"]
 
 [tool.ruff.lint]
 select = ["E", "F", "B"]

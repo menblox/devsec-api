@@ -25,16 +25,6 @@ def get_db() -> Iterator[Session]:
         db.close()
 
 
-@app.post("/users/", response_model=DbUser)
-async def create_user(user: UserCreate, db: Session = Depends(get_db)) -> User:
-    db_user = User(name=user.name, age=user.age)
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-
-    return db_user
-
-
 @app.post("/posts/", response_model=PostResponse)
 async def create_post(post: PostCreate, db: Session = Depends(get_db)) -> Post:
     db_user = db.query(User).filter(User.id == post.author_id).first()
