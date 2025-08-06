@@ -3,14 +3,12 @@ import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
 
 
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.main import app, get_db
 
 from app.database import Base
-
 
 
 test_database_url = "sqlite:///:memory:"
@@ -22,6 +20,7 @@ test_engine = create_engine(
 
 tesingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=test_engine)
 
+
 def override_get_db():
     try:
         db = tesingSessionLocal()
@@ -31,6 +30,7 @@ def override_get_db():
 
 
 app.dependency_overrides[get_db] = override_get_db
+
 
 @pytest_asyncio.fixture(name="client")
 async def client_fixture():
@@ -44,12 +44,11 @@ async def client_fixture():
 
 
 @pytest.mark.asyncio
-async def test_create_user(client:AsyncClient):
+async def test_create_user(client: AsyncClient):
     response = await client.post(
-        "/register/", 
-        json={"name": "Jame", "age": 14, "password": "qwerty"}
-        )
-    
+        "/register/", json={"name": "Jame", "age": 14, "password": "qwerty"}
+    )
+
     assert response.status_code == 200
     data = response.json()
 
@@ -60,7 +59,7 @@ async def test_create_user(client:AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_get_user(client:AsyncClient):
+async def test_get_user(client: AsyncClient):
     responce = await client.get("/users/")
 
     assert responce.status_code == 200
@@ -97,13 +96,12 @@ async def test_get_user(client:AsyncClient):
     assert "password" not in data_2
 
     responce_get = await client.get("/users/")
-    
+
     assert responce_get.status_code == 200
 
     data_get = responce_get.json()
 
     assert len(data_get) == 2
-    
 
     names = {"Jame", "Anna"}
     act_names = {user["name"] for user in data_get}
@@ -114,9 +112,9 @@ async def test_get_user(client:AsyncClient):
 @pytest.mark.asyncio
 async def test_get_users_id(client: AsyncClient):
     response = await client.post(
-        "/register/", 
-        json={"name": "Dog", "age": 56, "password": "qweq"})
-    
+        "/register/", json={"name": "Dog", "age": 56, "password": "qweq"}
+    )
+
     assert response.status_code == 200
 
     data = response.json()
@@ -151,8 +149,8 @@ async def test_get_users_id(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_post_posts(client: AsyncClient):
     responce_user = await client.post(
-        "/register/", 
-        json={"name": "Dog", "age": 56, "password": "qweq"})
+        "/register/", json={"name": "Dog", "age": 56, "password": "qweq"}
+    )
 
     assert responce_user.status_code == 200
 
@@ -198,8 +196,8 @@ async def test_get_posts(client: AsyncClient):
     assert data_none == []
 
     responce_user = await client.post(
-        "/register/", 
-        json={"name": "Dog", "age": 56, "password": "qweq"})
+        "/register/", json={"name": "Dog", "age": 56, "password": "qweq"}
+    )
 
     assert responce_user.status_code == 200
 
@@ -306,5 +304,3 @@ async def test_userid_posts(client: AsyncClient):
     assert responce_get_false1.status_code == 404
     data_get_false1 = responce_get_false1.json()
     assert data_get_false1["detail"] == "Post not found"
-
-
