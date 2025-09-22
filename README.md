@@ -1,0 +1,32 @@
+# devsecCI/CD
+
+Этот проект представляет собой демонстрацию современного процесса разработки, который объединяет Python, Docker и автоматизированные проверки безопасности в едином CI/CD-пайплайне.
+
+## В проекте я задействовал: 
+* Фреймворк: **FastAPI**
+* База данных: **SQLAlchemy**
+* Безопасность и аутентификация: **passlib**, **python-jose**
+* Инструменты разработки: **uvicorn**, **pydantic**
+* Линтинг и форматирование: **ruff**, **black**, **mypy**
+* Анализ безопасности: **bandit**, **trivy**, **gitleaks**
+* Инфраструктура: **Docker**, **docker-compose**, **GitHub Actions**
+
+## Установка и запуск:
+1. 
+```python
+git clone https://github.com/menblox/devsec-api.git
+cd devsec-api
+```
+2.
+```python
+docker compose up --build
+```
+
+
+## Структура проекта:
+* app/ - исходный код приложения
+* .github/workflows/ - GitHub Actions
+* Dockerfile и docker-compose.yml - Docker
+* tests/ - тесты для pytest
+* pyproject.toml - конфигурация для линтеров и форматтеров (ruff, black, mypy)
+
